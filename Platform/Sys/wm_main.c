@@ -232,14 +232,14 @@ void task_start (void *data)
     u8 mac_addr[6] = {0x00,0x25,0x08,0x09,0x01,0x0F};
 	bool enable = FALSE;
 	/* must call first to configure gpio Alternate functions according the hardware design */
-	wm_gpio_config();
+	wm_gpio_config();  //失能io口复用，初始化uart和spi的io口
 
 #if TLS_CONFIG_HARD_CRYPTO
-	tls_crypto_init();  //初始化加密模块
+	tls_crypto_init();  //初始化RSA加密模块
 #endif
 
-#if (TLS_CONFIG_LS_SPI)	
-	tls_spi_init();
+#if (TLS_CONFIG_LS_SPI)	 //低速spi
+	tls_spi_init();  //初始化spi主机驱动
 	tls_spifls_init();  //初始化flash单元结构
 #endif
 
@@ -301,7 +301,7 @@ void task_start (void *data)
 	}
 
 	UserMain();  //用户主函数
-	tls_sys_auto_mode_run();
+	tls_sys_auto_mode_run();  //发送系统自动运行模式的消息
 
     NVIC_SystemLPConfig(NVIC_LP_SLEEPDEEP, ENABLE);  //选择系统进入低功耗模式的条件
 	
