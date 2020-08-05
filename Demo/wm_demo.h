@@ -5,7 +5,7 @@
 #define DEMO_OFF	0
 
 //demo console
-#define DEMO_CONSOLE				DEMO_OFF
+#define DEMO_CONSOLE				DEMO_ON
 
 //socket demo
 #define DEMO_STD_SOCKET_CLIENT	    (DEMO_OFF && DEMO_CONSOLE)
@@ -14,7 +14,7 @@
 #define DEMO_UDP                    (DEMO_OFF && DEMO_CONSOLE)
 
 //connect demo
-#define DEMO_CONNECT_NET			(DEMO_OFF && DEMO_CONSOLE)
+#define DEMO_CONNECT_NET			(DEMO_ON && DEMO_CONSOLE)
 
 #define DEMO_SOCKET_CLIENT_SERVER   (DEMO_OFF && DEMO_CONSOLE)
 

@@ -12,7 +12,7 @@
 * Date : 2014-6-14
 *****************************************************************************/ 
 #include "wm_include.h"
-
+#include "User/user_http_server.h"
 
 void UserMain(void)
 {
@@ -22,5 +22,6 @@ void UserMain(void)
 	CreateDemoTask();
 #endif
 //用户自己的task
+	httpserver_init();
 }
 
