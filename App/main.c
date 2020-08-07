@@ -12,7 +12,7 @@
 * Date : 2014-6-14
 *****************************************************************************/ 
 #include "wm_include.h"
-#include "User/user_http_server.h"
+#include "User/lwip_demo.h"
 
 void UserMain(void)
 {
@@ -23,5 +23,6 @@ void UserMain(void)
 #endif
 //用户自己的task
 	httpserver_init();
+    udp_demo_init();
 }
 

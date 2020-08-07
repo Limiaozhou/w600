@@ -24,16 +24,16 @@
 
 /* 0x0000000F - 0x00000001 */
 /** Define the debugging level: info */
-#define TLS_DBG_LEVEL_INFO          TLS_DBG_ON
+#define TLS_DBG_LEVEL_INFO          TLS_DBG_OFF
 /** Define the debugging level: warning */
-#define TLS_DBG_LEVEL_WARNING       TLS_DBG_ON
+#define TLS_DBG_LEVEL_WARNING       TLS_DBG_OFF
 /** Define the debugging level: error */
-#define TLS_DBG_LEVEL_ERR           TLS_DBG_ON
+#define TLS_DBG_LEVEL_ERR           TLS_DBG_OFF
 /** Define the debugging level: dump */
-#define TLS_DBG_LEVEL_DUMP          TLS_DBG_ON
+#define TLS_DBG_LEVEL_DUMP          TLS_DBG_OFF
 
 /** general debug info switch, default: off */
-#define TLS_GENERAL_DBG             TLS_DBG_ON
+#define TLS_GENERAL_DBG             TLS_DBG_OFF
 
 
 #define __TLS_DBGPRT_INFO(fmt, ...)				     \

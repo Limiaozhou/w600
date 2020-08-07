@@ -116,4 +116,21 @@
 #define LWIP_NETIF_HOSTNAME             1
 #define LWIP_TCP_KEEPALIVE              1
 
+#define ETHARP_DEBUG                    LWIP_DBG_ON
+#define NETIF_DEBUG                     LWIP_DBG_ON
+#define PBUF_DEBUG                      LWIP_DBG_ON
+#define SOCKETS_DEBUG                   LWIP_DBG_ON
+#define ICMP_DEBUG                      LWIP_DBG_ON
+#define IGMP_DEBUG                      LWIP_DBG_ON
+#define IP_DEBUG                        LWIP_DBG_ON
+#define RAW_DEBUG                       LWIP_DBG_ON
+#define MEM_DEBUG                       LWIP_DBG_ON
+#define MEMP_DEBUG                      LWIP_DBG_ON
+#define SYS_DEBUG                       LWIP_DBG_ON
+#define TIMERS_DEBUG                    LWIP_DBG_ON
+#define TCP_DEBUG                       LWIP_DBG_ON
+#define UDP_DEBUG                       LWIP_DBG_ON
+#define DHCP_DEBUG                      LWIP_DBG_ON
+#define DNS_DEBUG                       LWIP_DBG_ON
+
 #endif /* end of __LWIP_OPTS_H */

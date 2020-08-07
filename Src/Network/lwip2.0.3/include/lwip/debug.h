@@ -156,6 +156,7 @@
                                    ((debug) & LWIP_DBG_ON) && \
                                    ((debug) & LWIP_DBG_TYPES_ON) && \
                                    ((s16_t)((debug) & LWIP_DBG_MASK_LEVEL) >= LWIP_DBG_MIN_LEVEL)) { \
+                                 LWIP_PLATFORM_DIAG(("%s: %s(%d): ", __FILE__, __FUNCTION__, __LINE__)); \
                                  LWIP_PLATFORM_DIAG(message); \
                                  if ((debug) & LWIP_DBG_HALT) { \
                                    while(1); \

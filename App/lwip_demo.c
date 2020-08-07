@@ -1,8 +1,11 @@
 #include "wm_include.h"
-#include "User/user_http_server.h"
+#include "User/lwip_demo.h"
 #include "lwip/opt.h"
 #include "lwip/arch.h"
 #include "lwip/api.h"
+#include "lwip/udp.h"
+
+#define UDP_ECHO_PORT 7
 
 const static char http_html_hdr[] = "HTTP/1.1 200 OK\r\nContent-type: text/html\r\n\r\n";
 const static char http_index_html[] = "<html><head><title>Congrats!</title></head> \
@@ -99,5 +102,60 @@ void httpserver_init()
       512,
       7,
       0);
+}
+
+static void udp_demo_callback(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+{
+    struct pbuf *q = NULL;
+    int recv_datalen = 0;
+    u8* recv_buf = malloc(p->tot_len);
+    const char * replay_head = "Reply: ";
+    u8* out_buf = malloc(strlen(replay_head) + (p->tot_len));
+
+    memset(recv_buf, 0, p->tot_len);
+    memset(out_buf, 0, strlen(replay_head) + (p->tot_len));
+    
+    if(arg)
+        printf("%s", (char*)arg);
+
+    for (q = p; q != NULL; q = q->next) {
+		memcpy(recv_buf + recv_datalen, q->payload, q->len);
+		recv_datalen += q->len;
+	}
+    pbuf_free(p);
+    q = NULL;
+    printf("recv_buf: %s\n", (char*)recv_buf);
+    
+    memcpy(out_buf, replay_head, strlen(replay_head));
+    memcpy(out_buf + strlen(replay_head), recv_buf, strlen(recv_buf));
+    free(recv_buf);
+    printf("out_buf: %s\n", (char*)out_buf);
+
+    q = pbuf_alloc(PBUF_TRANSPORT, strlen(out_buf) + 1, PBUF_RAM);
+    if(!q)
+
+    {
+        printf("out of PBUF_RAM \n");
+        return;
+    }
+
+    memset(q->payload, 0, q->len);
+    memcpy(q->payload, out_buf, strlen(out_buf));
+    free(out_buf);
+    printf("pbuf->payload: %s\n", (char*)q->payload);
+
+    udp_sendto(pcb, q, addr, port);
+    pbuf_free(q);
+}
+
+void udp_demo_init(void)
+{
+    struct udp_pcb * upcb;
+
+    printf("\n init udp demo \n");
+    
+    upcb = udp_new();
+    udp_bind(upcb, IP_ADDR_ANY, UDP_ECHO_PORT);
+    udp_recv(upcb, udp_demo_callback, NULL);
 }
 
